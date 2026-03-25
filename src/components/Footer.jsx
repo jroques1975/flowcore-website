@@ -20,16 +20,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-8">
           {/* Brand */}
           <div className="md:col-span-2">
-            <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M3 8h4M9 4l4 4-4 4" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-              <span className="font-semibold text-white text-[15px] tracking-tight">
-                FlowCore <span className="text-slate-400 font-normal">Systems</span>
-              </span>
-            </div>
+            <Link to="/" className="inline-block mb-4">
+              <img
+                src="/images/flowcore-logo-dark.png"
+                alt="FlowCore Systems"
+                className="h-8 w-auto"
+                style={{ mixBlendMode: 'screen' }}
+              />
+            </Link>
             <p className="text-slate-500 text-sm leading-relaxed max-w-xs">
               Building practical software for businesses that need clarity, structure, and better operational tools.
             </p>

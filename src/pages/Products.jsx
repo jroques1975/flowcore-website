@@ -5,6 +5,7 @@ const products = [
   {
     id: 'ledgerflow',
     name: 'LedgerFlowAI',
+    logo: '/images/ledgerflow-logo-dark.png',
     tagline: 'Accounting & financial operations platform',
     badge: 'Live',
     badgeColor: 'text-emerald-400 bg-emerald-400/10 border-emerald-400/20',
@@ -20,15 +21,12 @@ const products = [
       { title: 'Invoices & Billing', description: 'Create and track invoices for your customers and manage outstanding balances.' },
       { title: 'Built for Growth', description: 'Designed to support small businesses that need practical tools without enterprise complexity.' },
     ],
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <path d="M5 7h18M5 13h12M5 19h8M21 17v8M17 21h8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-      </svg>
-    ),
+    icon: null,
   },
   {
     id: 'task-intelligence',
     name: 'Task Intelligence',
+    logo: null,
     tagline: 'Smart task and workflow management',
     badge: 'In development',
     badgeColor: 'text-amber-400 bg-amber-400/10 border-amber-400/20',
@@ -80,16 +78,31 @@ export default function Products() {
               {/* Left: info */}
               <div className={idx % 2 === 1 ? 'lg:order-2' : ''}>
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-violet-500/20 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
-                    {product.icon}
-                  </div>
-                  <div>
-                    <span className={`text-xs font-semibold px-2.5 py-1 rounded-full border ${product.badgeColor}`}>
-                      {product.badge}
-                    </span>
-                  </div>
+                  {/* Icon — only shown when there's no logo */}
+                  {!product.logo && (
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-violet-500/20 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
+                      {product.icon}
+                    </div>
+                  )}
+                  <span className={`text-xs font-semibold px-2.5 py-1 rounded-full border ${product.badgeColor}`}>
+                    {product.badge}
+                  </span>
                 </div>
-                <h2 className="text-3xl font-semibold text-white mb-2">{product.name}</h2>
+
+                {/* Product name — logo image or text heading */}
+                {product.logo ? (
+                  <div className="mb-4">
+                    <img
+                      src={product.logo}
+                      alt={product.name}
+                      className="h-10 w-auto"
+                      style={{ mixBlendMode: 'screen' }}
+                    />
+                  </div>
+                ) : (
+                  <h2 className="text-3xl font-semibold text-white mb-2">{product.name}</h2>
+                )}
+
                 <p className="text-indigo-400 font-medium mb-5">{product.tagline}</p>
                 <p className="text-slate-400 leading-relaxed mb-4">{product.description}</p>
                 <p className="text-slate-500 leading-relaxed text-sm">{product.detail}</p>
