@@ -8,17 +8,43 @@ const contactReasons = [
   'Other',
 ];
 
+const MAILER_URL = 'https://mail.2309apt.com/send';
+const MAILER_KEY = '5b78824060cc2d26ac4b1dea8f291aac564a24ab6767e6f6136877f2d1632c5f';
+
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', reason: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState('');
+  const [sending, setSending] = useState(false);
 
   const handleChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSending(true);
+    setError('');
+    try {
+      const res = await fetch(MAILER_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${MAILER_KEY}`,
+        },
+        body: JSON.stringify({
+          to: 'info@flowcoresystemsai.com',
+          template: 'contact_form',
+          data: form,
+        }),
+      });
+      if (!res.ok) throw new Error('Send failed');
+      setSubmitted(true);
+    } catch {
+      setError('Something went wrong. Please email us directly at contact@flowcoresystemsai.com');
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -172,11 +198,16 @@ export default function Contact() {
                     />
                   </div>
 
+                  {error && (
+                    <p className="text-sm text-red-400 text-center">{error}</p>
+                  )}
+
                   <button
                     type="submit"
-                    className="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm transition-colors shadow-lg shadow-indigo-600/20"
+                    disabled={sending}
+                    className="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 disabled:opacity-60 disabled:cursor-not-allowed text-white font-medium text-sm transition-colors shadow-lg shadow-indigo-600/20"
                   >
-                    Send message
+                    {sending ? 'Sending…' : 'Send message'}
                   </button>
 
                   <p className="text-xs text-slate-600 text-center">
