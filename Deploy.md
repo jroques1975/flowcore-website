@@ -88,13 +88,24 @@ sshpass -p '7325Fjrp' ssh -o StrictHostKeyChecking=no jroques@10.0.0.57 \
 
 ## Cloudflare DNS
 
-All records are proxied CNAMEs pointing to the tunnel:
+### Active hostnames (proxied CNAMEs → tunnel)
 
 | Hostname | Zone |
 |---|---|
 | `flowcoresystemsai.com` | flowcoresystemsai.com |
 | `www.flowcoresystemsai.com` | flowcoresystemsai.com |
 | `flowcore.2309apt.com` | 2309apt.com |
+
+### Typo domain redirects (301 via Cloudflare Page Rules)
+
+`flowcoresystemai.com` was registered in error. All traffic is redirected at the Cloudflare edge — nothing reaches the server.
+
+| Hostname | Redirects to |
+|---|---|
+| `flowcoresystemai.com/*` | `https://www.flowcoresystemsai.com/$1` |
+| `www.flowcoresystemai.com/*` | `https://www.flowcoresystemsai.com/$1` |
+
+DNS for the typo domain uses proxied A records (`192.0.2.1`) so Cloudflare intercepts the traffic before it hits any origin.
 
 To update tunnel ingress rules (if hostnames change):
 ```
