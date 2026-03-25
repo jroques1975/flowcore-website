@@ -1,16 +1,108 @@
-# React + Vite
+# FlowCore Systems — Marketing Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Marketing website for **FlowCore Systems** (www.flowcoresystemsai.com).
 
-Currently, two official plugins are available:
+Built with React + Vite + Tailwind CSS.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Layer | Technology |
+|---|---|
+| Framework | React 19 + Vite |
+| Styling | Tailwind CSS v3 |
+| Routing | React Router v6 |
+| Language | JavaScript (JSX) |
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Project Structure
+
+```
+flowcore-website/
+├── public/
+│   └── images/
+│       ├── flowcore-logo-dark.png     ← FlowCore logo for dark backgrounds
+│       ├── flowcore-logo-light.png    ← FlowCore logo for light backgrounds
+│       ├── ledgerflow-logo-dark.png   ← LedgerFlowAI logo for dark backgrounds
+│       └── ledgerflow-logo-light.png  ← LedgerFlowAI logo for light backgrounds
+├── src/
+│   ├── components/
+│   │   ├── Navbar.jsx         ← Sticky navbar with scroll effect + mobile menu
+│   │   ├── Footer.jsx         ← Site footer with nav links
+│   │   ├── ProductCard.jsx    ← Reusable product card component
+│   │   ├── FeatureSection.jsx ← Feature grid section
+│   │   └── CTASection.jsx     ← Reusable call-to-action banner
+│   ├── pages/
+│   │   ├── Home.jsx           ← Hero, products preview, pillars, CTA
+│   │   ├── Products.jsx       ← Full product detail pages
+│   │   ├── About.jsx          ← Mission, values, who we build for
+│   │   └── Contact.jsx        ← Contact form with success state
+│   ├── App.jsx                ← Router setup + layout
+│   ├── main.jsx               ← Entry point
+│   └── index.css              ← Tailwind base + custom utilities
+├── index.html
+├── tailwind.config.js
+├── vite.config.js
+└── package.json
+```
+
+---
+
+## Pages
+
+| Route | Page | Description |
+|---|---|---|
+| `/` | Home | Hero, products overview, why FlowCore, CTA |
+| `/products` | Products | LedgerFlowAI + Task Intelligence detail sections |
+| `/about` | About | Mission, philosophy, who we build for |
+| `/contact` | Contact | Contact form |
+
+---
+
+## Design System
+
+- **Background:** Deep navy (`#050e1e`)
+- **Primary accent:** Indigo (`#6366f1`) → Violet (`#8b5cf6`) gradient
+- **Typography:** Inter (Google Fonts)
+- **Cards:** `glass-card` utility — semi-transparent with subtle border
+- **Logo rendering:** `mix-blend-mode: screen` blends logo dark backgrounds seamlessly onto the dark theme
+
+---
+
+## Running Locally
+
+```bash
+npm install
+npm run dev
+```
+
+Opens at `http://localhost:5173`
+
+## Production Build
+
+```bash
+npm run build
+```
+
+Output goes to `dist/`.
+
+---
+
+## Logo Usage
+
+| Logo file | Use when |
+|---|---|
+| `flowcore-logo-dark.png` | Dark backgrounds (navbar, footer, dark sections) |
+| `flowcore-logo-light.png` | Light backgrounds (if any light sections are added) |
+| `ledgerflow-logo-dark.png` | Dark backgrounds — LedgerFlowAI product sections |
+| `ledgerflow-logo-light.png` | Light backgrounds — LedgerFlowAI product sections |
+
+Logo source files live in `/Users/javierroques/AppDevelopment/media/`.
+
+---
+
+## GitHub
+
+Repository: https://github.com/jroques1975/flowcore-website
